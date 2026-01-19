@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-
-    public GameValues gameValues;
     
+    public GlobalValues globalValues;
+
     void Start()
     {
         
