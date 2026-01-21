@@ -42,7 +42,7 @@ public class PlayerState : MonoBehaviour
     {
         isInvincible = true;
         invincibleTime = GameSettingValues.ins.InvincibleTime;
-        GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 0.5f);
     }
 
     public void InvincibleOff()
