@@ -287,7 +287,7 @@ namespace Game.Runtime
                 // ここに毎フレームの処理を書く
                 _cameraObject.transform.position = new Vector3(_gameStateStore.State.CurrentValue.GameCenter, _cameraObject.transform.position.y, _cameraObject.transform.position.z);
                 _gameStateStore.Dispatch(new ChangeTimeLimitAction(-Time.deltaTime));
-                _gameStateStore.Dispatch(new ChangeCenterAction(_gameConfig.Speed));
+                _gameStateStore.Dispatch(new ChangeCenterAction(_gameConfig.Speed * Time.deltaTime));
                 
                 var speedUpRate = 1f;
 
@@ -346,7 +346,7 @@ namespace Game.Runtime
                 {
                     // スピードアップ中
                     _gamePlayerStateStore.Dispatch(new PlayerSpeedUpAction(_gamePlayerStateStore.State.CurrentValue.SpeedUpTime - Time.deltaTime));
-                    speedUpRate = _playerConfig.SpeedUpRate;
+                    speedUpRate *= _playerConfig.SpeedUpRate;
 
                     var playerSprite = _playerObject.GetComponent<SpriteRenderer>();
                     float flickerFrequency = _playerConfig.InvincibleItemFlickerFrequency; // 点滅の速さ
@@ -365,7 +365,7 @@ namespace Game.Runtime
                 }
 
                 // 横移動
-                var xSpeed = _gameConfig.Speed * speedUpRate;
+                var xSpeed = _gameConfig.Speed * speedUpRate * Time.deltaTime;
                 if (_playerMover.IsWallTouch() || _gamePlayerStateStore.State.CurrentValue.IsGameOver)
                 {
                     xSpeed = 0;
