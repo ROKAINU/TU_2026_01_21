@@ -19,7 +19,7 @@ MonoBehaviour:
   jumpSpeed: 15
   maxJumpCount: 1
   cantJumpTime: 2
-  damagedSpeedRate: 0.8
+  damagedSpeedRate: 0.9
   invincibleTime: 2
   invincibleItemTime: 10
   invincibleItemFlickerFrequency: 10
@@ -27,3 +27,28 @@ MonoBehaviour:
   speedUpTime: 2
   afterimageCount: 5
   afterimageInterval: 0.03
+  speedRateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0027770996
+      value: 0.9984131
+      inSlope: -0.23736563
+      outSlope: -0.23736563
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.18005487
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.9956481
+      outSlope: -0.9956481
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxDecelerateInputTime: 2

@@ -248,7 +248,7 @@ namespace Game.Runtime
         {
             // 基準となる地点
             Vector2 origin = new Vector2(x, 10f);
-            int layerMask = (1 << _groundLayerMask) | (1 << _enemyLayerMask);
+            int layerMask = 1 << _groundLayerMask;//(1 << _groundLayerMask)) | (1 << _enemyLayerMask);
             // 下方向に十分長いRayを飛ばす
             float maxDistance = 20f;
             RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, maxDistance, layerMask);
@@ -299,6 +299,17 @@ namespace Game.Runtime
                 Rect uvRect = _background.uvRect;
                 uvRect.x = _currentOffsetX;
                 _background.uvRect = uvRect;
+                #endregion
+
+                #region DecelerateInput
+                if(InputHandler.ins.decelerateInputTime > 0f)
+                {
+                    float t = InputHandler.ins.decelerateInputTime / _playerConfig.MaxDecelerateInputTime;
+                    float decelerateRate = _playerConfig.SpeedRateCurve.Evaluate(t);
+                    speedUpRate *= decelerateRate;
+                    
+                    //UnityEngine.Debug.Log($"減速入力時間残り: {InputHandler.ins.decelerateInputTime} 秒, 減速率: {decelerateRate}");
+                }
                 #endregion
 
                 #region UpdateInvincible

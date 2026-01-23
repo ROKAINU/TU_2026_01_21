@@ -19,6 +19,12 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     public event OnInput OnClickOrTap;
+    public float decelerateInputTime = 0f;
+
+    void Start()
+    {
+        decelerateInputTime = 0f;
+    }
 
     void Update()
     {
@@ -38,5 +44,17 @@ public class InputHandler : MonoBehaviour
 
         if(isClicked)
             OnClickOrTap.Invoke();
+
+        // 二本指タップ（タッチデバイス）
+        bool isTwoFingerTouch = Input.touchCount >= 2;
+
+        // 右クリック（マウス）
+        bool isRightMouseHeld = Input.GetMouseButton(1);
+
+        if (isTwoFingerTouch || isRightMouseHeld)
+            decelerateInputTime += Time.deltaTime;
+        else 
+            decelerateInputTime = 0f;
+
     }
 }

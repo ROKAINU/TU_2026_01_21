@@ -36,6 +36,10 @@ namespace Game
         [SerializeField]private int afterimageCount = 5;
         [Header("残像の間隔時間(/s)")]
         [SerializeField]private float afterimageInterval = 0.1f;
+        [Header("減速速度の倍率曲線:DontTouch!!!")]
+        [SerializeField]private AnimationCurve speedRateCurve;
+        [Header("減速入力の最大時間(/s)")]
+        [SerializeField]private float maxDecelerateInputTime = 2f;
 
         public Vector2 InitialPosition => initialPosition;
         public float EntranceAnimSpeed => entranceAnimSpeed;
@@ -52,6 +56,8 @@ namespace Game
         public float InvincibleItemFlickerFrequency => invincibleItemFlickerFrequency;
         public int AfterimageCount => afterimageCount;
         public float AfterimageInterval => afterimageInterval;
+        public AnimationCurve SpeedRateCurve => speedRateCurve;
+        public float MaxDecelerateInputTime => maxDecelerateInputTime;
     }
 }
 
