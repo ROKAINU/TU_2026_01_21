@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -14,14 +15,19 @@ namespace Game
         [SerializeField]private float itemAppearCount;
         [Header("生成するアイテムの高さ")]
         [SerializeField]private float generateItemOffsetY;
+        [Header("クリアアイテムの出現確率")]
+        [SerializeField]private float clearItemAppearRate;
 
         [SerializeField]private GameObject generateItemPrefab;
+        [SerializeField]private GameObject generateClearItemPrefab;
 
         public AnimationCurve ItemAppearRateCurve => itemAppearRateCurve;
         public float ItemAppearRate => itemAppearRate;
         public float ItemAppearCount => itemAppearCount;
         public GameObject GenerateItemPrefab => generateItemPrefab;
+        public GameObject GenerateClearItemPrefab => generateClearItemPrefab;
         public float GenerateItemOffsetY => generateItemOffsetY;
+        public float ClearItemAppearRate => clearItemAppearRate;
     }
 }
 

@@ -45,16 +45,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  enemyAppearRate: 0.01
+  enemyAppearRate: 0.8
   generateEnemyDataList:
   - Obj: {fileID: 2424788371217503525, guid: 92fc714cc4e69bb4382176d2d0859dc8, type: 3}
     Probability: 1
     Type: 0
   - Obj: {fileID: 7081799392902967944, guid: cf43d49c084d02646a20ad5d9bd31141, type: 3}
-    Probability: 3
+    Probability: 1
     Type: 1
   - Obj: {fileID: 340568045638657192, guid: 1418dfef00b745c4e90be3b58f1a27aa, type: 3}
-    Probability: 10
+    Probability: 1
     Type: 2
   crowAppearWarningTime: 2
   dustMoveSpeed: -3

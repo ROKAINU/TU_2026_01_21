@@ -45,7 +45,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  itemAppearRate: 0.001
+  itemAppearRate: 0.1
   itemAppearCount: 3
   generateItemOffsetY: 0.8
+  clearItemAppearRate: 1
   generateItemPrefab: {fileID: 7689494150697931980, guid: 540e0dd39499c304b8cb17b6b76d307f, type: 3}
+  generateClearItemPrefab: {fileID: 3149667163899338095, guid: 013db5290ba311e46be1e7ba77a3d59c, type: 3}

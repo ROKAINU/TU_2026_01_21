@@ -16,6 +16,7 @@ namespace Game.Runtime
     internal sealed class GameMainLoop : IAsyncStartable//神クラス:VCountainerがよくわかってないせい
     {
         float RightScreenPositionOffset = 7.66f;
+        int ClearItemCount = 3;
 
         ///
         private readonly PlayerConfig _playerConfig;
@@ -80,6 +81,7 @@ namespace Game.Runtime
             /// プレイ中
             EnemyGenerator(ctx).Forget();
             ItemGenerator(ctx).Forget();
+            ClearItemGenerator(ctx).Forget();
             await PlayAsync(ctx);
 
             /// 退場
@@ -181,7 +183,7 @@ namespace Game.Runtime
                     var rand = UnityEngine.Random.Range(0f, 1f);
                     var enemyData = enemyGenerateList[i];
 
-                    if(rand <= enemyGenerateProbability * enemyData.Probability)
+                    if(rand <= enemyGenerateProbability * enemyData.Probability * Time.deltaTime)
                     {
                         var enemy = UnityEngine.Object.Instantiate(
                             enemyData.Obj,
@@ -230,7 +232,7 @@ namespace Game.Runtime
 
                 // 敵生成の具体的な実装をここに記述
                 var generateEnemyPositionX = _gameStateStore.State.CurrentValue.GameCenter + 11f;
-                if(rand <= itemGenerateProbability)
+                if(rand <= itemGenerateProbability * Time.deltaTime)
                 {
                     UnityEngine.Object.Instantiate(
                         _itemConfig.GenerateItemPrefab,
@@ -241,6 +243,82 @@ namespace Game.Runtime
                         Quaternion.identity);
                 }
                 await UniTask.Yield(ctx);
+            }
+        }
+        
+        private async UniTask ClearItemGenerator(CancellationToken ctx)
+        {
+            var OneCycleTime = _gameConfig.TimeLimit/(ClearItemCount * 3);
+            for(int i = 0; i < ClearItemCount; i++)
+            {
+                await waitOneCycle();
+                
+                UnityEngine.Debug.Log($"クリアアイテム生成サイクル {i+1} 開始");
+                var cycleTime = OneCycleTime;
+                int generatedCount = 0;
+                while (!ctx.IsCancellationRequested)
+                {
+                    await UniTask.Yield(ctx);
+                    
+                    // 敵生成の具体的な実装をここに記述
+                    cycleTime -= Time.deltaTime;
+
+                    if(generatedCount >= 1) break;
+
+                    var rand = UnityEngine.Random.Range(0f, 1f);
+                    var itemGenerateProbability = _itemConfig.ItemAppearRateCurve.Evaluate(cycleTime / OneCycleTime) * _itemConfig.ClearItemAppearRate * Time.deltaTime;
+                    var generateEnemyPositionX = _gameStateStore.State.CurrentValue.GameCenter + 11f;
+                    if(rand <= itemGenerateProbability)
+                    {
+                        generateItem(generateEnemyPositionX);
+                        generatedCount++;
+                    }
+
+                    if(cycleTime <= 0f) 
+                    {
+                        generateItem(generateEnemyPositionX);
+                        break;
+                    }
+                }
+
+                while (!ctx.IsCancellationRequested)
+                {
+                    // 次のサイクルまで待機
+                    cycleTime -= Time.deltaTime;
+                    if(cycleTime <= 0f) break;
+                    await UniTask.Yield(ctx);
+                }
+                UnityEngine.Debug.Log($"クリアアイテム生成サイクル {i+1} 終了");
+                
+                await waitOneCycle();
+            }
+
+            void generateItem(float generateEnemyPositionX)
+            {
+                UnityEngine.Object.Instantiate(
+                    _itemConfig.GenerateClearItemPrefab,
+                    new Vector3(
+                        generateEnemyPositionX,
+                        UnityEngine.Random.Range
+                            (LowestPoint(generateEnemyPositionX).y 
+                                + _itemConfig.GenerateClearItemPrefab.transform.localScale.y/2f 
+                                + _itemConfig.GenerateItemOffsetY,
+                            3f),
+                        0f),
+                        Quaternion.identity);
+
+                UnityEngine.Debug.Log("クリアアイテムを生成しました");
+            }
+
+            async UniTask waitOneCycle()
+            {
+                var cycleTime = OneCycleTime;
+                while (!ctx.IsCancellationRequested)
+                {
+                    cycleTime -= Time.deltaTime;
+                    if(cycleTime <= 0f) break;
+                    await UniTask.Yield(ctx);
+                }
             }
         }
 
