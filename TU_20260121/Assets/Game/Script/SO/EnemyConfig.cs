@@ -6,12 +6,12 @@ namespace Game
     [CreateAssetMenu(fileName = "EnemyConfig", menuName = "Game/DataSources/EnemyConfig")]
     internal class EnemyConfig : ScriptableObject
     {
-        [Header("敵の出現確率の曲線")]
+        [Header("敵の出現確率の曲線:DontTouch!!!")]
         [SerializeField]private AnimationCurve enemyAppearRateCurve;
         [Header("敵の出現確率")]
         [SerializeField]private float enemyAppearRate;
 
-        [Header("生成する敵のデータリスト")]
+        [Header("生成する敵のデータリスト:DontTouch!!!")]
         [SerializeField]private GenerateEnemyData[] generateEnemyDataList;
 
         [Header("カラスの出現警告時間")]

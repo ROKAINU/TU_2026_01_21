@@ -18,7 +18,7 @@ namespace Game
         [Header("スクロール設定")]
         [SerializeField]private float backgroundScrollSpeed = 1f;
 
-        [Header("画面外判定用オフセット(画面外までの距離)")]
+        [Header("画面外判定用オフセット(画面外までの距離):DontTouch!!!")]
         [SerializeField]private float deathZoneOffset;
 
         public float TimeLimit => timeLimit;

@@ -6,7 +6,7 @@ namespace Game
     [CreateAssetMenu(fileName = "ItemConfig", menuName = "Game/DataSources/ItemConfig")]
     internal class ItemConfig : ScriptableObject
     {
-        [Header("出現確率の曲線")]
+        [Header("出現確率の曲線:DontTouch!!!")]
         [SerializeField]private AnimationCurve itemAppearRateCurve;
         [Header("出現確率")]
         [SerializeField]private float itemAppearRate;
