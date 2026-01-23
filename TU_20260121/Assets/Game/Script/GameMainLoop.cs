@@ -79,6 +79,7 @@ namespace Game.Runtime
             
             /// プレイ中
             EnemyGenerator(ctx).Forget();
+            ItemGenerator(ctx).Forget();
             await PlayAsync(ctx);
 
             /// 退場
@@ -204,6 +205,7 @@ namespace Game.Runtime
                                 //generateEnemyPositionX += UnityEngine.Random.Range(1f, 3f);
                                 break;
                             case EnemyType.Mole:
+                                enemy.GetComponent<MoleGenerator>().Init(_gameStateStore, _playerObject, _enemyConfig);
                                 break;
                             default:
                                 break;
@@ -217,6 +219,30 @@ namespace Game.Runtime
             }
         }
         
+        private async UniTask ItemGenerator(CancellationToken ctx)
+        {
+            var itemGenerateProbability = _itemConfig.ItemAppearRate;
+
+            while (!ctx.IsCancellationRequested)
+            {
+                // アイテム生成の具体的な実装をここに記述
+                var rand = UnityEngine.Random.Range(0f, 1f);
+
+                // 敵生成の具体的な実装をここに記述
+                var generateEnemyPositionX = _gameStateStore.State.CurrentValue.GameCenter + 11f;
+                if(rand <= itemGenerateProbability)
+                {
+                    UnityEngine.Object.Instantiate(
+                        _itemConfig.GenerateItemPrefab,
+                        new Vector3(
+                            generateEnemyPositionX,
+                            LowestPoint(generateEnemyPositionX).y + _itemConfig.GenerateItemPrefab.transform.localScale.y/2f + _itemConfig.GenerateItemOffsetY,
+                            0f),
+                        Quaternion.identity);
+                }
+                await UniTask.Yield(ctx);
+            }
+        }
 
         private Vector2 LowestPoint(float x)
         {

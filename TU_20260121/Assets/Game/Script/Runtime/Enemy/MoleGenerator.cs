@@ -9,23 +9,29 @@ namespace Game.Runtime
     {
         [SerializeField] private GameObject molePrefab;
         [SerializeField] private float xOffset;
+        [SerializeField] private float AppearPos;
 
-        private Store<GameState> _gameStateStore;
-        private EnemyConfig _enemyConfig;
+        internal Store<GameState> _gameStateStore;
+        internal GameObject _playerObject;
+        internal EnemyConfig _enemyConfig;
 
-        [Inject]
-        internal void Construct(Store<GameState> gameStateStore)
+        internal void Init(Store<GameState> gameStateStore, GameObject playerObject, EnemyConfig enemyConfig)
         {
             _gameStateStore = gameStateStore;
+            _playerObject = playerObject;
+            _enemyConfig = enemyConfig;
         }
 
-        /*void Update()
+        void Update()
         {
-            if (appearDelay <= 0f)
-            {
-                Instantiate(molePrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
-            }
-        }*/
+            if(!IsInScreen.judge(transform)) 
+                return;
+
+            if(_playerObject.transform.position.x + AppearPos < transform.position.x) 
+                return;
+            
+            Instantiate(molePrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }
