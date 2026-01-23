@@ -173,12 +173,12 @@ namespace Game.Runtime
             void GenerateEnemy(float enemyGenerateProbability = 0.02f)
             {
                 enemyGenerateProbability *= _enemyConfig.EnemyAppearRate;
-                var rand = UnityEngine.Random.Range(0f, 1f);
 
                 // 敵生成の具体的な実装をここに記述
                 var generateEnemyPositionX = _gameStateStore.State.CurrentValue.GameCenter + 11f;
                 for(int i = 0; i < enemyGenerateList.Length; i++)
                 {
+                    var rand = UnityEngine.Random.Range(0f, 1f);
                     var enemyData = enemyGenerateList[i];
 
                     if(rand <= enemyGenerateProbability * enemyData.Probability)
