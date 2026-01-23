@@ -15,6 +15,6 @@ MonoBehaviour:
   timeLimit: 90
   entranceTime: 3
   showReadyCountTime: 2
-  speed: 0.1
+  speed: 12
   backgroundScrollSpeed: 0.1
   deathZoneOffset: -10.5

@@ -19,7 +19,7 @@ MonoBehaviour:
   jumpSpeed: 15
   maxJumpCount: 1
   cantJumpTime: 2
-  damagedSpeedRate: 0.95
+  damagedSpeedRate: 0.8
   invincibleTime: 2
   invincibleItemTime: 10
   invincibleItemFlickerFrequency: 10
