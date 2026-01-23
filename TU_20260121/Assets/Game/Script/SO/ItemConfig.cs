@@ -15,7 +15,7 @@ namespace Game
         [SerializeField]private float itemAppearCount;
         [Header("生成するアイテムの高さ")]
         [SerializeField]private float generateItemOffsetY;
-        [Header("クリアアイテムの出現確率")]
+        [Header("クリアアイテムの出現確率:DontTouch!!!")]
         [SerializeField]private float clearItemAppearRate;
 
         [SerializeField]private GameObject generateItemPrefab;
