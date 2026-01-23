@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - ScoreItem
   - Enemy
+  - InvincibleItem
+  - ItemForClear
+  - SpeedUpItem
+  - CantJumpEnemy
   layers:
   - Default
   - TransparentFX
