@@ -199,7 +199,7 @@ namespace Game.Runtime
                                 break;
                             case EnemyType.Bird:
                                 enemy.GetComponent<CrowGenerator>().Init(_gameStateStore, _enemyConfig);
-                                var yOffset = UnityEngine.Random.Range(LowestPoint(generateEnemyPositionX).y, 4f);
+                                var yOffset = UnityEngine.Random.Range(LowestPoint(generateEnemyPositionX).y + 1f, 4f);
                                 enemy.transform.position = new Vector3(
                                     enemy.transform.position.x,
                                     yOffset,
