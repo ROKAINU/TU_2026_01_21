@@ -73,6 +73,7 @@ namespace Game.LifetimeScopes
             // PlayerMover と PlayerCollision を登録
             builder.RegisterComponentInHierarchy<PlayerMover>();
             builder.RegisterComponentInHierarchy<PlayerCollision>();
+            builder.RegisterComponentInHierarchy<MouseUI>();
 
             // エントリーポイントを登録
             // GameMainLoop を登録

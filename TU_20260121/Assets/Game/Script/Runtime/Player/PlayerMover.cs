@@ -16,13 +16,14 @@ namespace Game.Runtime
         [SerializeField] private LayerMask _wallLayer;
         [SerializeField] private LayerMask _groundEnemyLayer;
         [SerializeField] private PhysicsMaterial2D _noFrictionMaterial;
+        [SerializeField] private float _jumpInterval = 0.5f;
+
+        private float _currentJumpInterval = 0f;
 
         private PlayerConfig _playerConfig;
         private GameConfig _gameConfig;
         private Store<GameState> _gameStateStore;
         private Store<GamePlayerState> _gamePlayerStateStore;
-        
-        public int _jumpCount = 0;
 
         [Inject]
         internal void Construct(
@@ -36,7 +37,7 @@ namespace Game.Runtime
             _gameStateStore = gameStateStore;
             _gamePlayerStateStore = gamePlayerStateStore;
 
-            _jumpCount = _playerConfig.MaxJumpCount;
+            _gamePlayerStateStore.Dispatch(new PlayerSetJumpCountAction(_playerConfig.MaxJumpCount));
 
             //UnityEngine.Debug.Log($"GameConfig:{_gameConfig}, PlayerCongfig:{_playerConfig.JumpSpeed}, GameStateStore:{_gameStateStore}, PlayerStateStore:{_gamePlayerStateStore}");
         }
@@ -50,7 +51,7 @@ namespace Game.Runtime
             _rigidBody2D.gravityScale = _playerConfig.Gravity;
 
             // ジャンプ回数初期化
-            _jumpCount = _playerConfig.MaxJumpCount;
+            _gamePlayerStateStore.Dispatch(new PlayerSetJumpCountAction(_playerConfig.MaxJumpCount));
         }
 
         private void Awake()
@@ -103,10 +104,18 @@ namespace Game.Runtime
             // Y速度のみ保持（横移動はTransformで制御）
             var yVelocity = _rigidBody2D.linearVelocity.y;
             _rigidBody2D.linearVelocity = new Vector2(0, yVelocity);
+        }
+
+        void Update()
+        {
+            _currentJumpInterval -= Time.deltaTime;
+
+            if(_currentJumpInterval < 0f)
+                _currentJumpInterval = 0f;
 
             // 着地した瞬間にジャンプ回数をリセット
-            if (_groundCheck.CheckGround())
-                _jumpCount = _playerConfig.MaxJumpCount;
+            if (_groundCheck.CheckGround() && _currentJumpInterval <= 0f)
+                _gamePlayerStateStore.Dispatch(new PlayerSetJumpCountAction(_playerConfig.MaxJumpCount));
         }
 
         private void Jump()
@@ -115,12 +124,13 @@ namespace Game.Runtime
                 return;
             
             // 地面にいるか、空中ジャンプ可能な場合
-            if ((_groundCheck.CheckGround() || _jumpCount > 0) && _gamePlayerStateStore.State.CurrentValue.NotJumpableTime <= 0f)
+            if ((_groundCheck.CheckGround() || _gamePlayerStateStore.State.CurrentValue.JumpCount > 0) && _gamePlayerStateStore.State.CurrentValue.NotJumpableTime <= 0f)
             {
-                _jumpCount--;
+                _gamePlayerStateStore.Dispatch(new PlayerSetJumpCountAction(_gamePlayerStateStore.State.CurrentValue.JumpCount - 1));
                 _rigidBody2D.linearVelocity = new Vector2(0, _playerConfig.JumpSpeed);
+                _currentJumpInterval = _jumpInterval;
                 
-                Debug.Log($"ジャンプ！残り回数: {_jumpCount}");
+                Debug.Log($"ジャンプ！残り回数: {_gamePlayerStateStore.State.CurrentValue.JumpCount}");
             }
         }
     }

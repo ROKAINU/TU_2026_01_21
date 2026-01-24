@@ -16,7 +16,7 @@ namespace Game
         [SerializeField]private float gravity = 3f;
         [Header("ジャンプ速度設定")]
         [SerializeField]private float jumpSpeed = 3f;
-        [Header("追加ジャンプ回数設定")]
+        [Header("ジャンプ回数設定")]
         [SerializeField]private int maxJumpCount = 2;
         [Header("ジャンプ不可時間(/s)")]
         [SerializeField]private float cantJumpTime = 0.2f;
@@ -36,7 +36,7 @@ namespace Game
         [SerializeField]private int afterimageCount = 5;
         [Header("残像の間隔時間(/s)")]
         [SerializeField]private float afterimageInterval = 0.1f;
-        [Header("減速速度の倍率曲線:DontTouch!!!")]
+        [Header("減速速度の倍率曲線:DontTouch!!!/値は自由でも範囲は0から1にしなければならない")]
         [SerializeField]private AnimationCurve speedRateCurve;
         [Header("減速入力の最大時間(/s)")]
         [SerializeField]private float maxDecelerateInputTime = 2f;

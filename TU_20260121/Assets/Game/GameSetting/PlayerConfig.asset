@@ -17,7 +17,7 @@ MonoBehaviour:
   animationSpeed: 1
   gravity: 4
   jumpSpeed: 15
-  maxJumpCount: 1
+  maxJumpCount: 2
   cantJumpTime: 2
   damagedSpeedRate: 0.9
   invincibleTime: 2
@@ -33,20 +33,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.0027770996
       value: 0.9984131
-      inSlope: -0.23736563
-      outSlope: -0.23736563
+      inSlope: -0.016039643
+      outSlope: -0.016039643
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.18005487
+      outWeight: 0.19722223
     - serializedVersion: 3
       time: 1
       value: -1
-      inSlope: -1.9928787
-      outSlope: -1.9928787
-      tangentMode: 34
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.15833336
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

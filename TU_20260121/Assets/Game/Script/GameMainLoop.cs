@@ -67,7 +67,7 @@ namespace Game.Runtime
         public async UniTask StartAsync(CancellationToken ctx)
         {
             // ゲームメインループの処理をここに記述
-            _gamePlayerStateStore.Dispatch(new GamePlayerState(false, 0f, false, 0f, 0f, false));
+            _gamePlayerStateStore.Dispatch(new GamePlayerState(0f, false, 0f, false, 0f, 0f, false, _playerConfig.MaxJumpCount));
             _gameGlobalStore.Dispatch(new GameGlobalState(0, 0, 0));
             _gameStateStore.Dispatch(new GameState(0, _gameConfig.TimeLimit, false));
             
@@ -457,19 +457,14 @@ namespace Game.Runtime
                 }
                 #endregion
                 
-                #region PlayerControll
-                // 地面に着地したらジャンプ回数リセット
-                if (_playerMover._groundCheck.CheckGround())
-                {
-                    _playerMover._jumpCount = _playerConfig.MaxJumpCount;
-                }
-
-                // 横移動
+                #region PlayerControll// 横移動
                 var xSpeed = _gameConfig.Speed * speedUpRate * Time.deltaTime;
                 if (_playerMover.IsWallTouch() || _gamePlayerStateStore.State.CurrentValue.IsGameOver)
                 {
                     xSpeed = 0;
                 }
+
+                _gamePlayerStateStore.Dispatch(new SetSpeed(xSpeed / Time.deltaTime));
                   
                 _playerObject.transform.position = new Vector2(
                     _playerObject.transform.position.x + xSpeed,
@@ -562,7 +557,7 @@ namespace Game.Runtime
                         ui.Text.text = ui.Prefix + _gameGlobalStore.State.CurrentValue.ClearItemCount.ToString();
                         break;
                     case UIType.JumpCount:
-                        ui.Text.text = ui.Prefix + (_playerObject.GetComponent<PlayerMover>()._jumpCount + 1).ToString();
+                        ui.Text.text = ui.Prefix + (_gamePlayerStateStore.State.CurrentValue.JumpCount + 1).ToString();
                         break;
                     case UIType.ReadyCount:
                         // ReadyCountは別途処理
