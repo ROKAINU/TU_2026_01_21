@@ -85,6 +85,17 @@ namespace Game.Runtime
             await PlayAsync(ctx);
 
             /// 退場
+            _gameStateStore.Dispatch(new ChangeIsRunningAction(false));
+            if(_gamePlayerStateStore.State.CurrentValue.IsGameOver)
+            {
+                UnityEngine.Debug.Log("ゲームオーバー処理へ移行");
+                await GameOver(ctx);
+            }
+            else
+            {
+                UnityEngine.Debug.Log("ゲームクリア処理へ移行");
+                //await GameClear(ctx);
+            }
             
             /// リザルトへ移行
             SceneLoader.SceneLoad("ResultScene");
@@ -507,7 +518,6 @@ namespace Game.Runtime
                     // ゲームオーバー処理
                     _gamePlayerStateStore.Dispatch(new PlayerGameOverAction());
                     UnityEngine.Debug.Log("デスゾーン到達！ゲームオーバー");
-                    await GameOver(ctx);
                 }
                 #endregion
 

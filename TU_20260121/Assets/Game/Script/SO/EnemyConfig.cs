@@ -20,12 +20,16 @@ namespace Game
         [Header("ゴミの移動速度")]
         [SerializeField]private float dustMoveSpeed;
 
+        [Header("モグラの警告の移動速度")]
+        [SerializeField]private float moleWarningMoveSpeed;
+
 
         public AnimationCurve EnemyAppearRateCurve => enemyAppearRateCurve;
         public float EnemyAppearRate => enemyAppearRate;
         public GenerateEnemyData[] GenerateEnemyDataList => generateEnemyDataList;
         public float CrowAppearWarningTime => crowAppearWarningTime;
         public float DustMoveSpeed => dustMoveSpeed;
+        public float MoleWarningMoveSpeed => moleWarningMoveSpeed;
     }
 
     [System.Serializable]

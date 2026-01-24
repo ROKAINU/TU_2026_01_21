@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Runtime.MoleGenerator
   molePrefab: {fileID: 6327625131929657871, guid: 76bc1a7d12a4b1b47ad346dbfa628457, type: 3}
   xOffset: 8.37
+  yOffset: 0.6
+  moleYOffset: 0.3
   AppearPos: 4
 --- !u!212 &8476891592102612101
 SpriteRenderer:
@@ -98,8 +100,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -7268593677194210034, guid: cc883e1677dc5594685420ced22fca32, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

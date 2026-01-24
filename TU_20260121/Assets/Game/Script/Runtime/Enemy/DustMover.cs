@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 using NUnit.Framework;
 using Game;
+using System;
 
 namespace Game.Runtime
     {
@@ -10,11 +11,14 @@ namespace Game.Runtime
     {
         bool isInScreen = false;
         Rigidbody2D rb;
+        Transform thisTransform;
         [SerializeField] private EnemyConfig enemyConfig;
+        [SerializeField] private float destroyOffsetX;
 
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            thisTransform = GetComponent<Transform>();
             MoveDust().Forget();
         }
 
@@ -34,12 +38,14 @@ namespace Game.Runtime
             
             isInScreen = false;
 
-            while(!IsInScreen.judge(transform))
+            thisTransform.position = new Vector3(transform.position.x + destroyOffsetX, transform.position.y, transform.position.z);
+
+            while(!IsInScreen.judge(thisTransform))
                 await UniTask.Yield();
 
             isInScreen = true;
 
-            while (IsInScreen.judge(transform))
+            while (IsInScreen.judge(thisTransform))
                 await UniTask.Yield();
 
             Destroy(gameObject);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5048537511011547946}
   - component: {fileID: 3592362317496289018}
   - component: {fileID: 3743294345550166570}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,8 +69,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.06735802, y: -0.13470967}
-  m_Size: {x: 1.7123985, y: 1.7123985}
+  m_Offset: {x: 0.005887985, y: -0.00059485435}
+  m_Size: {x: 1.8353386, y: 1.8688674}
   m_Direction: 0
 --- !u!114 &5048537511011547946
 MonoBehaviour:
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DustMover
   enemyConfig: {fileID: 11400000, guid: bac0fff46376f0b498b461be5fb63921, type: 2}
+  destroyOffsetX: 0
 --- !u!212 &3592362317496289018
 SpriteRenderer:
   serializedVersion: 2
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3209938780920006429, guid: 7c88cf1bedd71284aa54ae047b8469e5, type: 3}
+  m_Sprite: {fileID: 2803888049730819266, guid: 7c8b0ff4b90ffc347a99c60cc5e0350a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -7,6 +7,7 @@ public class GroundCheck : MonoBehaviour
     [Header("Ground Check Settings")]
     [SerializeField] private float checkDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask groundEnemyLayer;
 
     public bool IsGrounded { get; private set; }
 
@@ -14,11 +15,12 @@ public class GroundCheck : MonoBehaviour
 
     public bool CheckGround()
     {
+        int Layer = groundLayer | groundEnemyLayer;
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position,     // 発射位置
             Vector2.down,           // 下方向
             checkDistance,          // 距離
-            groundLayer             // レイヤー
+            Layer                   // レイヤー
         );
 
         return hit.collider != null;

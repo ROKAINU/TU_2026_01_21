@@ -58,3 +58,4 @@ MonoBehaviour:
     Type: 2
   crowAppearWarningTime: 2
   dustMoveSpeed: -3
+  moleWarningMoveSpeed: -6

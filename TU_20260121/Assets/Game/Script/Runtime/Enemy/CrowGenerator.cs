@@ -24,11 +24,6 @@ namespace Game.Runtime
         void Update()
         {
             if(!IsInScreen.judge(transform)) return;
-            if (_gameStateStore == null || _gameStateStore.State == null || _gameStateStore.State.CurrentValue == null)
-            {
-                Debug.LogError("CrowGenerator: gameStateStore or its members are null!");
-                return;
-            }
 
             transform.position = new Vector3(_gameStateStore.State.CurrentValue.GameCenter + xOffset, transform.position.y, 0f);
             appearDelay -= Time.deltaTime;

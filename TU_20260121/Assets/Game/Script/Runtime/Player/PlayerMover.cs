@@ -14,6 +14,7 @@ namespace Game.Runtime
         public Rigidbody2D _rigidBody2D;
         public GroundCheck _groundCheck;
         [SerializeField] private LayerMask _wallLayer;
+        [SerializeField] private LayerMask _groundEnemyLayer;
         [SerializeField] private PhysicsMaterial2D _noFrictionMaterial;
 
         private PlayerConfig _playerConfig;
@@ -64,12 +65,13 @@ namespace Game.Runtime
 
         public bool IsWallTouch()
         {
+            int Layer = _wallLayer | _groundEnemyLayer;
             Vector2 origin = (Vector2)transform.position + Vector2.right * 0.3f;
             RaycastHit2D hit = Physics2D.Raycast(
                 origin,
                 Vector2.right,
                 wallCheckDistance,
-                _wallLayer);
+                Layer);
 
             return hit.collider != null;
         }
@@ -101,6 +103,10 @@ namespace Game.Runtime
             // Y速度のみ保持（横移動はTransformで制御）
             var yVelocity = _rigidBody2D.linearVelocity.y;
             _rigidBody2D.linearVelocity = new Vector2(0, yVelocity);
+
+            // 着地した瞬間にジャンプ回数をリセット
+            if (_groundCheck.CheckGround())
+                _jumpCount = _playerConfig.MaxJumpCount;
         }
 
         private void Jump()
