@@ -501,7 +501,8 @@ namespace Game.Runtime
 
                 // デスゾーンチェック
                 var gameCenter = _gameStateStore.State.CurrentValue.GameCenter;
-                if (_playerObject.transform.position.x - gameCenter < _gameConfig.DeathZoneOffset)
+                if (_playerObject.transform.position.x - gameCenter < _gameConfig.DeathZoneOffsetX
+                    || _playerObject.transform.position.y < _gameConfig.DeathZoneOffsetY)
                 {
                     // ゲームオーバー処理
                     _gamePlayerStateStore.Dispatch(new PlayerGameOverAction());

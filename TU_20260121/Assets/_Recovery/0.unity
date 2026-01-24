@@ -9397,7 +9397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameValues
   TimeLimit: 90
   Speed: 9
-  DeathZoneOffset: -9
+  DeathZoneOffsetX: -9
   Gravity: 4
   JumpSpeed: 15
   MaxJumpCount: 2

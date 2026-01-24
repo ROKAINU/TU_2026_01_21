@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameConfig
   timeLimit: 90
   entranceTime: 3
-  showReadyCountTime: 2
+  showReadyCountTime: 3
   speed: 12
   backgroundScrollSpeed: 0.1
-  deathZoneOffset: -10.5
+  deathZoneOffsetX: -10.5
+  deathZoneOffsetY: -5.6
