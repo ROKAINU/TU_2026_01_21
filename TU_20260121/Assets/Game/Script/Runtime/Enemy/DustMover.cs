@@ -37,7 +37,6 @@ namespace Game.Runtime
             if(!this) return;
             
             isInScreen = false;
-
             thisTransform.position = new Vector3(transform.position.x + destroyOffsetX, transform.position.y, transform.position.z);
 
             while(!IsInScreen.judge(thisTransform))
