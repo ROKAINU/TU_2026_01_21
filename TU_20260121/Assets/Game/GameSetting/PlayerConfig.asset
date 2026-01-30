@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffce0ae62e7f7d4491ede5352e6ebe9, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerConfig
-  initialPosition: {x: -4.6, y: 0.33}
+  initialPosition: {x: -4.6, y: 0}
   entranceAnimSpeed: 0.5
-  animationSpeed: 1
+  animationSpeed: 1.25
   gravity: 4
   jumpSpeed: 15
   maxJumpCount: 2
   cantJumpTime: 2
   damagedSpeedRate: 0.9
-  invincibleTime: 2
+  invincibleTime: 1
   invincibleItemTime: 10
   invincibleItemFlickerFrequency: 10
   speedUpRate: 1.2
-  speedUpTime: 2
+  speedUpTime: 1
   afterimageCount: 5
   afterimageInterval: 0.03
   speedRateCurve:
