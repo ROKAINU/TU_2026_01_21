@@ -18,12 +18,12 @@ MonoBehaviour:
   gravity: 4
   jumpSpeed: 15
   maxJumpCount: 2
-  cantJumpTime: 2
+  cantJumpTime: 1
   damagedSpeedRate: 0.9
   invincibleTime: 1
   invincibleItemTime: 10
   invincibleItemFlickerFrequency: 10
-  speedUpRate: 1.2
+  speedUpRate: 1.25
   speedUpTime: 1
   afterimageCount: 5
   afterimageInterval: 0.03
